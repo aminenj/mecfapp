@@ -1,0 +1,38 @@
+h1 {
+    font-style: italic;
+  }
+
+form{
+    width: 500px;
+    
+}
+.container{
+
+
+    text-align: center;
+    border: 2px solid black;
+    width: 600px;
+    height: 80vh;
+    padding: 25px;
+    margin-top: 50px;
+    background: transparent;
+    backdrop-filter: blur(20px);
+    /*background: transparent;
+    backdrop-filter: blur(20px);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;*/
+}
+
+
+.container p{ margin-bottom: 30px; font-weight: 800; font-size: 30px;color: #0069c0;}
+
+.btn1 {
+    padding: 10px;
+    border: 1px solid #0069c0 ;
+    background-color:#0069c0;
+    border-radius: 5px;
+    font: inherit;
+  }
+

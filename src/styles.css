@@ -1,0 +1,29 @@
+@import '../node_modules/@syncfusion/ej2-material-theme/styles/material.css';
+/* You can add global styles to this file, and also import other style files */
+body{
+    background-image: url('./assets/images/bg.jpg');
+}
+
+.e-schedule .e-appointment-details {
+    padding: 0 !important;
+}
+
+
+.template-wrapper {
+    background: #1aaa55;
+    padding: 10px;
+    padding-left: 14px;
+    font-size: 14px;
+    font-weight: 500;
+
+
+}
+.week-template-wrapper {
+    background: greenyellow;
+    height: 100%;
+    padding: 10px;
+    padding-left: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+}

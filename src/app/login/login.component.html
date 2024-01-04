@@ -1,0 +1,26 @@
+<div class="container"> 
+    <h3> Login </h3>
+    <form [formGroup]="loginForm" class="form-container"  >
+        <div class=" form-group">
+           <label for="email">E-mail</label>
+           <input  formControlName="email"      type="email"  id="email" class="form-control" placeholder="E-mail" >
+           
+    
+        </div>  
+        <small *ngIf="loginForm.controls['email'].dirty && loginForm.hasError('required','email')" class="text-danger">*Email is required</small>
+        <div class=" form-group">
+            <label for="password">Password</label>
+            <input  formControlName="password"     type="password"  id="password" class="form-control" placeholder="Password" >
+         </div> 
+         <small  *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')" class="text-danger">*Password is required</small>
+         <div class=" form-group">
+            <button  type="submit"     (click)="onSubmit()" class="btn1 btn-danger "class="btn1 form-control m-1  text-light   btn1-block mt-4 w-1 "> Send</button>
+         </div>
+
+         <div  class=" form-group">
+            <button class="btn btn-link" (click)="goToRegister()"> Create new account ? Please Register</button>
+        </div>
+
+    </form>
+
+</div>
