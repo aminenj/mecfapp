@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ReservationService } from '../services/reservation.service';
 import { EventSettingsModel, Month, TimelineMonth, View ,  ActionEventArgs} from '@syncfusion/ej2-angular-schedule';
+import { Ireservation } from './Ireservation'
+import { Isalle } from './Isalle';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -14,7 +17,7 @@ export class Salle1Component implements OnInit {
 //  calendarEvents: EventInput[] = [];
 
 eventSettings: EventSettingsModel;
-
+ reservation:Ireservation;
 
  /* title='app-first';
   public setView: View = 'Week';
@@ -33,7 +36,9 @@ eventSettings: EventSettingsModel;
     }]
   }*/
 
-  constructor( private reservationService: ReservationService) { }
+  constructor( private reservationService: ReservationService , private route: ActivatedRoute ) { }
+
+      lastPart :any;
 
   ngOnInit() {
 
@@ -59,14 +64,33 @@ eventSettings: EventSettingsModel;
       };
     });
   }
+  
+
 
 
   onActionBegin(args: ActionEventArgs): void {
     console.log('actioon',args.requestType);
-    console.log( 'data actioon', args.data)
+    console.log( 'data actioon', args.data[0] )
 
     if (args.requestType === 'eventCreate') {
+      
 
+      this.route.params.subscribe(params => {
+       this.lastPart= params['salle'];
+      
+      });
+
+      if(this.lastPart=="salle1" )
+        this.lastPart=  Isalle[0]
+      else  this.lastPart=  Isalle[1]
+
+
+      
+
+   this.reservation.idsalle = this.lastPart;
+  //  if(args &&  args.data &&  args.data?[0]  &&  args.data?[0].StartTime )
+  //   this.reservation.date_debut= args.data?[0] ;
+ 
       this.reservationService.addReservation(args.data).subscribe((response: any) => {
         // Handle the response if needed
         console.log('Reservation added:', response);
@@ -79,6 +103,7 @@ eventSettings: EventSettingsModel;
   else if (args.requestType=== 'eventChange') {
 
     console.log(args.changedRecords);
+
     // this.reservationService.updateReservation(args.changedRecords?[0]._id as string, args.changedRecords?[0]).subscribe((response: any) => {
     //     // Handle the response if needed
     //     console.log('Reservation updated:', response);
