@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EventSettingsModel, Month, TimelineMonth, View } from '@syncfusion/ej2-angular-schedule';
 
 
+
+
 @Component({
   selector: 'app-salle2',
   template: '<ejs-schedule height="850" width="1250"   [eventSettings]="eventObject"     [selectedDate]="setDate"   [currentView]="setView" [views]="setViews"></ejs-schedule>',
@@ -21,9 +23,18 @@ export class Salle2Component implements OnInit {
       //IsBlock: true
       //IsReadonly: true
       //RecurrenceRule: "FREQ=DAILY;INTERVAL=1;COUNT=10"
+
+
+
+
+
     }]
   }
   public setViews: View[] = ["Day","Month","TimelineMonth","TimelineDay"]
+
+
+
+
 
 
   constructor() { }
