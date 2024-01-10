@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReservationService } from '../services/reservation.service';
-import { EventSettingsModel, Month, TimelineMonth, View ,  ActionEventArgs} from '@syncfusion/ej2-angular-schedule';
+import { EventSettingsModel, Month, TimelineMonth, View ,  ActionEventArgs , DayService, WeekService, MonthService ,CalendarEventModel } from '@syncfusion/ej2-angular-schedule';
 import { Ireservation } from './Ireservation'
 import { Isalle } from './Isalle';
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-salle1',
  /* template: '<ejs-schedule height="850" width="1250"   [eventSettings]="eventObject"     [selectedDate]="setDate"   [currentView]="setView"  > </ejs-schedule>',*/
- template:'<ejs-schedule   [eventSettings]="eventSettings" (actionBegin)="onActionBegin($event)"  > </ejs-schedule>',
+ template:'<ejs-schedule   [eventSettings]="eventSettings" (actionBegin)="onActionBegin($event)"  [selectedDate]="selectedDate" > </ejs-schedule>',
  // templateUrl: './salle1.component.html',
   styleUrls: ['./salle1.component.css']
 })
@@ -17,7 +17,17 @@ export class Salle1Component implements OnInit {
 //  calendarEvents: EventInput[] = [];
 
 eventSettings: EventSettingsModel;
- reservation:Ireservation;
+public eventSettings: CalendarEventModel[];
+public selectedDate: Date;
+
+
+ reservation:Ireservation = {
+  idsalle:"",
+  date_debut:"",
+  date_fin:"",
+  description:"",
+  sujet:""
+ };
 
  /* title='app-first';
   public setView: View = 'Week';
@@ -41,7 +51,10 @@ eventSettings: EventSettingsModel;
       lastPart :any;
 
   ngOnInit() {
-
+    this.eventSettings = this.getEventData();
+    
+  
+   
    /* this.calendarService.getEvents().subscribe((events: any[]) => {
       this.calendarEvents = events.map((event) => ({
         title: event.title,
@@ -57,10 +70,12 @@ eventSettings: EventSettingsModel;
   
 
   }
+  getEventData(): EventSettingsModel {
+    throw new Error('Method not implemented.');
+  }
   loadReservations(): void {
     this.reservationService.getReservations().subscribe((reservations: any) => {
-      this.eventSettings = {
-        dataSource: reservations,
+      this.eventSettings = {  dataSource: reservations,
       };
     });
   }
@@ -70,28 +85,32 @@ eventSettings: EventSettingsModel;
 
   onActionBegin(args: ActionEventArgs): void {
     console.log('actioon',args.requestType);
-    console.log( 'data actioon', args.data[0] )
+   
+  
 
-    if (args.requestType === 'eventCreate') {
-      
+    if (args.requestType === 'eventCreate' && Array.isArray(args.data)) {
+      // fjdkfjsdkfjsdkfjsdjfsd
 
       this.route.params.subscribe(params => {
        this.lastPart= params['salle'];
       
       });
 
-      if(this.lastPart=="salle1" )
-        this.lastPart=  Isalle[0]
-      else  this.lastPart=  Isalle[1]
+    
 
 
       
+      console.log('actioon',args.data[0]);
 
-   this.reservation.idsalle = this.lastPart;
-  //  if(args &&  args.data &&  args.data?[0]  &&  args.data?[0].StartTime )
-  //   this.reservation.date_debut= args.data?[0] ;
+   this.reservation.idsalle ='salle1';
+
+     this.reservation.date_debut= args.data[0]['StartTime'] ;
+     
+     this.reservation.date_fin= args.data[0]['EndTime'] ;
+     this.reservation.description= args.data[0]['Description'] ;
+     this.reservation.sujet = args.data[0]['Subject'] ;
  
-      this.reservationService.addReservation(args.data).subscribe((response: any) => {
+      this.reservationService.addReservation(this.reservation).subscribe((response: any) => {
         // Handle the response if needed
         console.log('Reservation added:', response);
         // Refresh the scheduler after adding
@@ -125,3 +144,12 @@ eventSettings: EventSettingsModel;
      }
     }
   }
+ 
+  private getEventData(): CalendarEventModel[] {
+    return [
+      { Id: 1, Subject: 'Réunion importante', StartTime: new Date('2024-01-09T10:00:00'), EndTime: new Date('2024-01-09T11:00:00') , Description:'Valide' ,idsalle:'salle1'},
+      { Id: 2, Subject: 'Déjeuner déquipe', StartTime: new Date('2024-01-10T12:30:00'), EndTime: new Date('2024-01-10T13:30:00') ,Description:'Valide', idsalle:'salle1' },
+    ];
+  }
+
+

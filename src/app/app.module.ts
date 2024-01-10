@@ -36,7 +36,7 @@ import { ReservationService } from '../app/services/reservation.service';
 
 
   ],
-  providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService , DragAndDropService, ResizeService , ReservationService] ,
+  providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService , DragAndDropService, ResizeService , ReservationService ] ,
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,16 +11,16 @@ export class ReservationService {
   constructor(private http: HttpClient) { }
   
   getReservations(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/api/reservations`);
+    return this.http.get<any[]>(`${this.baseUrl}/reservation/all`);
   }
   addReservation(reservation: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/api/reservations`, reservation);
+    return this.http.post<any>(`${this.baseUrl}/reservation/addres`, reservation);
   }
   updateReservation(id: string, reservation: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/api/reservations/${id}`, reservation);
+    return this.http.put<any>(`${this.baseUrl}/reservations//upres${id}`, reservation);
   }
   deleteReservation(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/api/reservations/${id}`);
+    return this.http.delete<any>(`${this.baseUrl}/reservations//delres${id}`);
   }
 
 
