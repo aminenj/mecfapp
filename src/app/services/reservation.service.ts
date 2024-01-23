@@ -23,6 +23,13 @@ export class ReservationService {
     return this.http.delete<any>(`${this.baseUrl}/reservations//delres${id}`);
   }
 
+  // getReservations(): Observable<CalendarEventModel[]> {
+  //   const events: CalendarEventModel[] = [
+  //     { Id: 1, Subject: 'Réunion importante', StartTime: new Date('2024-01-09T10:00:00'), EndTime: new Date('2024-01-09T11:00:00'), Description: 'Valide', idsalle: 'salle1' },
+  //     { Id: 2, Subject: 'Déjeuner d\'équipe', StartTime: new Date('2024-01-10T12:30:00'), EndTime: new Date('2024-01-10T13:30:00'), Description: 'Valide', idsalle: 'salle1' },
+  //   ];
+  //   return of(events);
+  // }
 
 
 
